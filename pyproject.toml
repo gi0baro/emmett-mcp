@@ -1,0 +1,98 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "emmett-mcp"
+version = "0.1.0"
+description = "MCP extension for Emmett framework"
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.9"
+
+authors = [
+    { name = "Giovanni Barillari", email = "g@baro.dev" }
+]
+
+keywords = ["mcp", "emmett", "llm", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+dependencies = [
+    "emmett-core~=1.3",
+    "httpx~=0.28",
+    "mcp-min~=20241105.160",
+]
+
+[project.urls]
+Homepage = 'https://github.com/gi0baro/emmett-mcp'
+Funding = 'https://github.com/sponsors/gi0baro'
+Source = 'https://github.com/gi0baro/emmett-mcp'
+Issues = 'https://github.com/gi0baro/emmett-mcp/issues'
+
+[tool.hatch.build.targets.sdist]
+include = [
+    '/README.md',
+    '/LICENSE',
+    '/emmett_mcp',
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = 'double'
+
+[tool.ruff.lint]
+extend-select = [
+    # E and F are enabled by default
+    'B',      # flake8-bugbear
+    'C4',     # flake8-comprehensions
+    'C90',    # mccabe
+    'I',      # isort
+    'N',      # pep8-naming
+    'Q',      # flake8-quotes
+    'RUF100', # ruff (unused noqa)
+    'S',      # flake8-bandit
+    'W',      # pycodestyle
+]
+extend-ignore = [
+    'B006', # mutable function args are fine
+    'B904', # rising without from is fine
+    'E731', # assigning lambdas is fine
+    'N815', # leave to us var naming
+    'N818',
+    'S101', # assert is fine
+    'S110', # pass on exceptions is fine
+]
+mccabe = { max-complexity = 44 }
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+lines-after-imports = 2
+known-first-party = ['emmett_mcp']
+
+[tool.ruff.lint.per-file-ignores]
+'emmett_mcp/__init__.py' = ['F401']
+'emmett_mcp/_compat.py' = ['F401']
+
+[tool.uv]
+dev-dependencies = [
+    "ruff~=0.11",
+    "emmett55~=1.2",
+    "emmett~=2.7",
+]
